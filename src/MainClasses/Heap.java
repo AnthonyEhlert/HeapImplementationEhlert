@@ -5,7 +5,7 @@ import Exceptions.HeapFullException;
 /*****************************************************************
  * Name				: HeapImplementationEhlert
  * Author			: Tony Ehlert
- * Created			: Mar 16, 2023
+ * Created			: Mar 21, 2023
  * Course			: CIS152 Data Structures
  * Version			: 1.0
  * OS				: Windows 11
@@ -249,6 +249,12 @@ public class Heap {
 		return heapToBuild;
 	}
 	
+	/**
+	 * This method removes the element at the provided index position
+	 * 
+	 * @param i - index position of element to remove
+	 * @throws HeapEmptyException
+	 */
 	public void remove(int i) throws HeapEmptyException {
 		// check for emptyHeap
 		if (size <= 0) {
