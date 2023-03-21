@@ -272,11 +272,36 @@ class HeapImplementationTest {
 	@Test
 	void testBuildMaxHeap() throws HeapFullException, HeapEmptyException {
 		// ARRANGE
-		double[] heapArray = new double[] {1.1, 2.2, 3.3, 4.4, 5.5};
+		double[] heapArray = new double[] {1.1, 3.3, 2.2, 4.4, 5.5};
 		Heap myHeap = new Heap(heapArray.length);
 		myHeap = myHeap.buildMaxHeap(heapArray);
 		String actual;
-		String expected = "[5.5, 4.4, 3.3, 2.2, 1.1, ]";
+		String expected = "[5.5, 4.4, 2.2, 3.3, 1.1, ]";
+		// ACT
+		actual = myHeap.printHeap();
+		// ASSERT
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	void testRemoveEmpty() throws HeapFullException, HeapEmptyException {
+		// ARRANGE
+		double[] heapArray = new double[] {1.1, 3.3, 2.2, 4.4, 5.5};
+		Heap myHeap = new Heap(heapArray.length);
+		// ACT
+		// ASSERT
+		assertThrows(HeapEmptyException.class, () -> myHeap.remove(0));
+	}
+	
+	@Test
+	void testRemove() throws HeapFullException, HeapEmptyException {
+		// ARRANGE
+		double[] heapArray = new double[] {1.1, 3.3, 2.2, 4.4, 5.5};
+		Heap myHeap = new Heap(heapArray.length);
+		myHeap = myHeap.buildMaxHeap(heapArray);
+		myHeap.remove(2);
+		String actual;
+		String expected = "[5.5, 4.4, 1.1, 3.3, ]";
 		// ACT
 		actual = myHeap.printHeap();
 		// ASSERT

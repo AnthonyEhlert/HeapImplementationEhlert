@@ -228,6 +228,15 @@ public class Heap {
 		return heapSort;
 	}
 	
+	/**
+	 * This method builds a heap with a provided array as
+	 * opposed to inserting each element of the array into 
+	 * the heap using the insert() method
+	 * 
+	 * @param doubleArr = array of doubles to build heap from
+	 * @return - newly built heap from given array
+	 * @throws HeapFullException
+	 */
 	public Heap buildMaxHeap(double[] doubleArr) throws HeapFullException {
 		Heap heapToBuild = new Heap(doubleArr.length);
 		for (int i = doubleArr.length - 1; i >= 0; i--) {
@@ -238,6 +247,18 @@ public class Heap {
 			heapToBuild.insert(doubleArr[i]);
 		}
 		return heapToBuild;
+	}
+	
+	public void remove(int i) throws HeapEmptyException {
+		// check for emptyHeap
+		if (size <= 0) {
+			throw new HeapEmptyException();
+		}
+		
+		// call of private increaseVal method to increase the
+		// value of the element to max/infinite
+		increaseVal(i, Double.MAX_VALUE);
+		removeMax();
 	}
 	
 	//****PRIVATE METHODS****\\
@@ -315,4 +336,32 @@ public class Heap {
 		return ((i * 2) + 2);
 	}
 	
+	/**
+	 * This method is used by the public method remove()
+	 * to remove and update the heap to ensure the heap
+	 * property is maintained
+	 * 
+	 * @param i - index position of element to be updated
+	 * @param newValue - new value of element
+	 */
+	private void increaseVal(int i, double newValue) {
+		// update value of element at index provided
+		arr[i] = newValue;
+		
+		// while loop checks to ensure current index isn't root and 
+		// that parent of index isn't less than value of current index
+		while (i != 0 && arr[(parent(i))] < arr[i]) {
+			// currentVal variable to hold value of current index
+			double currentVal = arr[i];
+			
+			// replace value of current index with value of index's parent
+			arr[i] = arr[parent(i)];
+			
+			// replace parent's value with currentVal
+			arr[parent(i)] = currentVal;
+			
+			// set i to parent of current
+			i = parent(i);
+		}
+	}
 }

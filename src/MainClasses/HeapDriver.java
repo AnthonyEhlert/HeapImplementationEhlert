@@ -122,6 +122,19 @@ public class HeapDriver {
 		}
 		System.out.println("////END OF removeMax() TESTS\\\\\\\\");
 		
+		System.out.println("\n////START OF remove() TESTS\\\\\\\\");
+		try {
+			heapContents = testHeap1.printHeap();
+			System.out.println("testHeap1 Contents before remove(): " + heapContents);
+			testHeap1.remove(4);
+			heapContents = testHeap1.printHeap();
+			System.out.println("testHeap1 Contents after remove(4) aka 92.3: " + heapContents);
+		} catch (HeapEmptyException e1) {
+			System.out.println("printHeap() HeapEmptyException Thrown");
+		}
+		System.out.println("////END OF remove() TESTS\\\\\\\\");
+		
+		
 		System.out.println("\n////START OF heapSort() TESTS\\\\\\\\");
 		double[] sortedHeap1;
 		double[] sortedHeap2;
